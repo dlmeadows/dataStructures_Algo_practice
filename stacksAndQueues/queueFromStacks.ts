@@ -1,26 +1,35 @@
 class MyQueue {
     private s1: any[];
+    private s2: any[];
     constructor() {
         this.s1 = [];
         this.s2 = [];
     }
 
     push(x: number): void {
-        return this.s1.push(x);
+        while (this.s1.length > 0) {
+            this.s2.push(this.s1.pop());
+        }
 
+        this.s1.push(x);
+        while (this.s2.length > 0) {
+            this.s1.push(this.s2.pop());
+        }
     }
 
     pop(): number {
-
-        return 0;
+        return this.s1.pop();
     }
 
     peek(): number {
-        return this.s1[this.s1.length -1];
+        return this.s1[this.s1.length-1];
     }
 
     empty(): boolean {
-        return true;
+        if (this.s1.length === 0 ) {
+            return true;
+        }
+        return false;
     }
 }
 
